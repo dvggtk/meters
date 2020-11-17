@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const _sseRouter = require('./routes/_sse');
+
 
 var app = express();
 
@@ -19,8 +21,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  res.locals.NODE_ENV = req.app.get("env");
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/_server-sent-events', _sseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
