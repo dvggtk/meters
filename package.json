@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node ./node_modules/gulp-cli/bin/gulp.js build && node ./bin/www"
   },
+  "engines": {
+    "node": "^14.0.0"
+  },
   "dependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
