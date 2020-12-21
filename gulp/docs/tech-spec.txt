@@ -1,0 +1,16 @@
+лицевые счета accounts
+1) number
+2) name
+3) meters
+
+счетчики meters
+1) number
+2) name
+3) type ([ХВ холодная вода, ГВ горячая вода, ЭЛ электроэнергия])
+4) readings (date, reading)
+
+
+
+
+
+
