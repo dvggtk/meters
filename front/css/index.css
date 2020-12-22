@@ -13,3 +13,10 @@ body {
 	max-width: 320px;
 	margin: auto;
 }
+
+@media (min-width: 640px) {
+	body {
+		max-width: unset;
+		margin: unset;
+	}
+}

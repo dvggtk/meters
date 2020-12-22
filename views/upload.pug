@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Загрузить базу данных
+  form(action="/upload", method="post", enctype="multipart/form-data")
+    input(type="file", name="db")
+    hr
+    input(type="submit", value="Отправить")
+  

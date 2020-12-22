@@ -25,12 +25,18 @@
 
 	$: {
 		accountPromise = getAccount(accountToCheck); 
-		// meterToCheck = "";
+		transmitPromise = null;
 	}
 
+	$: if (meterToCheck) {
+			meterPromise = getMeter(accountToCheck, meterToCheck);
+			transmitPromise = null;
+			(async () => { meter = null; meter = await meterPromise; })().catch(()=>{});
+		}
+
 	$: {
-		meterPromise = getMeter(accountToCheck, meterToCheck);
-		(async () => { meter = null; meter = await meterPromise; })().catch(()=>{});
+		reading = reading;
+		transmitPromise = null;
 	}
 	
 </script>
@@ -39,6 +45,7 @@
 	article {
 		background-color: beige;
 		padding: 5px;
+		max-width: 320px;
 	}
 
 	.control {

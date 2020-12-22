@@ -11,10 +11,14 @@
 
 REST
 GET /api/v1.0/accounts?token=777&format=(txt|json|xlsx) -- получить базу лицевых счетов, включая показания счетчиков
+
 PUT /api/v1.0/accounts?token=777 -- загрузить базу лицевых счетов
+curl -i -X PUT -H "Content-Type: application/json" http://localhost:3000/api/v1.0/accounts?token=777 --upload-file accounts.json
+curl -X POST -F db=@accounts.json http://localhost:3000/upload
+
 GET /api/v1.0/check?account=123 -- проверить существование лицевого счета
 GET /api/v1.0/check?account=123&meter=42071086 -- проверить существование счетчика
-PUT /api/v1.0/readings??account=123&meter=42071086&reading=123654
+PUT /api/v1.0/readings?account=123&meter=42071086&reading=123654
 
 
 

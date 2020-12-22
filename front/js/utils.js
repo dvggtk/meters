@@ -1,28 +1,27 @@
-import accounts from './data';
-const accountNumbers = Object.keys(accounts);
-
 async function getAccount (accountNoToCheck) {
-	const accountsFiltered = accountNumbers.filter(
-		accountNumber => {
-			return parseInt(accountNumber) === parseInt(accountNoToCheck)
-		}
-	);
+	const url = new URL('/api/v1.0/check', window.location.origin);
+	const params = {account: accountNoToCheck};
+	url.search = new URLSearchParams(params).toString();
+
+	const response = await fetch(url);
+	if (!response.ok) throw Error("Лицевой счет не найден");
 	
-	await new Promise( resolve => setTimeout(resolve, 500 + Math.floor(Math.random() * 500)) );
-	
-	if (accountsFiltered.length !== 1) throw Error("Лицевой счет не найден");
-	
-	return accountsFiltered[0];
+	const account = await response.json();
+
+	return account;
 }
 
-async function getMeter (accountNo, meterNoToCheck) {
-	const account = accounts[accountNo];
-	const meter = account.meters[meterNoToCheck];
+async function getMeter (accountNoToCheck, meterNoToCheck) {
+	const url = new URL('/api/v1.0/check', window.location.origin);
+	console.log(url);
+	const params = {account: accountNoToCheck, meter: meterNoToCheck};
+	url.search = new URLSearchParams(params).toString();
 
-	await new Promise( resolve => setTimeout(resolve, 500 + Math.floor(Math.random() * 500)) );
+	const response = await fetch(url);
+	if (!response.ok) throw Error("Счетчик не найден");
 	
-	if (!meter) throw Error("Счетчик не найден");
-	
+	const meter = await response.json();
+
 	return meter;
 }
 
