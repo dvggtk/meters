@@ -1,9 +1,10 @@
 import accounts from './data';
+const accountNumbers = Object.keys(accounts);
 
-async function getAccount (accountNo) {
-	const accountsFiltered = accounts.filter(
-		account => {
-			return parseInt(account.accountNo) === parseInt(accountNo)
+async function getAccount (accountNoToCheck) {
+	const accountsFiltered = accountNumbers.filter(
+		accountNumber => {
+			return parseInt(accountNumber) === parseInt(accountNoToCheck)
 		}
 	);
 	
@@ -14,12 +15,23 @@ async function getAccount (accountNo) {
 	return accountsFiltered[0];
 }
 
-async function putValue ({accountNo, number, value}) {
-	const account = await getAccount(accountNo);
-	const meter = account.meters.find(meter => parseInt(meter.number) === parseInt(number));
+async function getMeter (accountNo, meterNoToCheck) {
+	const account = accounts[accountNo];
+	const meter = account.meters[meterNoToCheck];
+
+	await new Promise( resolve => setTimeout(resolve, 500 + Math.floor(Math.random() * 500)) );
+	
+	if (!meter) throw Error("Счетчик не найден");
+	
+	return meter;
+}
+
+
+async function putValue (accountNo, meterNo, reading) {
+	const meter = await getMeter(accountNo, meterNo);
 	if (!meter) throw Error("Не удалось передать показания");
-	meter.currentValue = value;
+	meter.currentReading = reading;
 	return true;
 }
 
-export {getAccount, putValue};
+export {getAccount, getMeter, putValue};
