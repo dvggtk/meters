@@ -1,34 +1,78 @@
-export default [
-	{
-		"accountNo": "5233",
-		"fio": "Иванов А.Б.",
-		"address": "Карбышева, 11-234",
-		"meters": [
-			{"meterType": "ЭЛ", "number": "0054976", "info": "счетчик марки Перун", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ХВ", "number": "0054934", "info": "ванная комната", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ГВ", "number": "0054923", "info": "ванная комната", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ХВ", "number": "0054938", "info": "кухня", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ГВ", "number": "0054927", "info": "кухня", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null}
-		]
-	},
-	{
-		"accountNo": "1523",
-		"fio": "Иванов А.Б.",
-		"address": "Карбышева, 11-234",
-		"meters": [
-			{"meterType": "ЭЛ", "number": "0054976", "info": "", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ХВ", "number": "0054934", "info": "ванная комната", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ГВ", "number": "0054923", "info": "ванная комната", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null}
-		]
-	},
-	{
-		"accountNo": "3223",
-		"fio": "Петров А.Б.",
-		"address": "Карбышева, 11-232",
-		"meters": [
-			{"meterType": "ЭЛ", "number": "0054234", "info": "", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ХВ", "number": "0054234", "info": "ванная комната", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null},
-			{"meterType": "ГВ", "number": "0054343", "info": "ванная комната", "nextVerifyDate": "2022-11-27", "prevValue": 12343, "currentValue": null}
-		]
-	}
-]
+export default {
+  "91": {
+    "owner": "Фисенко Л.Г.",
+    "meters": {
+      "42033844": {"type": "ЭЛ", "memo": "802"},
+      "42071064": {"type": "ЭЛ", "memo": "830"},
+      "42068733": {"type": "ЭЛ", "memo": "832"},
+
+      "4164469": {"type": "ХВ", "memo": "802"},
+      "4277700": {"type": "ХВ", "memo": "830"},
+      "4272470": {"type": "ХВ", "memo": "832"},
+
+      "4188133": {"type": "ГВ", "memo": "802"},
+      "4173575": {"type": "ГВ", "memo": "830"},
+      "4288778": {"type": "ГВ", "memo": "832"}
+    }
+  },
+  "50": {
+    "owner": "Образцова В.А.",
+    "meters": {
+      "42028374": {"type": "ЭЛ", "memo": ""},
+
+      "8727123": {"type": "ХВ", "memo": "430"},
+      "8727161": {"type": "ХВ", "memo": "432"},
+
+      "8712441": {"type": "ГВ", "memo": "430"},
+      "8712421": {"type": "ГВ", "memo": "432"}
+    }
+  },
+  "125": {
+    "owner": "Сердюк Н.С.",
+    "meters": {
+      "42029102": {"type": "ЭЛ", "memo": "438"},
+
+      "200209082": {"type": "ХВ", "memo": "438"},
+
+      "200209081": {"type": "ГВ", "memo": "438"}
+    }
+  },
+  "123": {
+    "owner": "Куприянова Е.М.",
+    "meters": {
+      "42071086": {"type": "ЭЛ", "memo": "427"},
+
+      "8712406к20": {"type": "ХВ", "memo": "438"},
+
+      "200230155": {"type": "ГВ", "memo": "438"}
+    }
+  },
+  "55": {
+    "owner": "Карпова Р.И.",
+    "meters": {
+      "42000571": {"type": "ЭЛ", "memo": "427"}
+    }
+  },
+  "100": {
+    "owner": "Антонова О.Ю.",
+    "meters": {
+      "41999754": {"type": "ЭЛ", "memo": "831"},
+
+      "200164209": {"type": "ХВ", "memo": "831"},
+
+      "200164220": {"type": "ГВ", "memo": "831"}
+    }
+  },
+  "38": {
+    "owner": "Шмелева И.Э.",
+    "meters": {
+      "42031505": {"type": "ЭЛ", "memo": "237,244"}
+    }
+  },
+  "39": {
+    "owner": "Октябрьская Н.П.",
+    "meters": {
+      "42031505": {"type": "ЭЛ", "memo": "237,244"}
+    }
+  }
+}
