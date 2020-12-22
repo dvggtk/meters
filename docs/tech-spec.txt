@@ -9,6 +9,17 @@
 3) type ([ХВ холодная вода, ГВ горячая вода, ЭЛ электроэнергия])
 4) readings (date, reading)
 
+REST
+GET /api/v1.0/accounts?token=777&format=(txt|json|xlsx) -- получить базу лицевых счетов, включая показания счетчиков
+PUT /api/v1.0/accounts?token=777 -- загрузить базу лицевых счетов
+GET /api/v1.0/check?account=123 -- проверить существование лицевого счета
+GET /api/v1.0/check?account=123&meter=42071086 -- проверить существование счетчика
+PUT /api/v1.0/readings??account=123&meter=42071086&reading=123654
+
+
+
+
+
 
 
 
