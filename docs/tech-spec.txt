@@ -9,8 +9,10 @@
 3) type ([ХВ холодная вода, ГВ горячая вода, ЭЛ электроэнергия])
 4) readings (date, reading)
 
+GET /readings -- показания счетчиков в формате html для просмотра
+
 REST
-GET /api/v1.0/accounts?token=777&format=(txt|json|xlsx) -- получить базу лицевых счетов, включая показания счетчиков
+GET /api/v1.0/accounts?token=777&period=202012(txt|json|xlsx) -- получить базу лицевых счетов, включая показания счетчиков
 
 PUT /api/v1.0/accounts?token=777 -- загрузить базу лицевых счетов
 curl -i -X PUT -H "Content-Type: application/json" http://localhost:3000/api/v1.0/accounts?token=777 --upload-file accounts.json
@@ -18,7 +20,23 @@ curl -X POST -F db=@accounts.json http://localhost:3000/upload
 
 GET /api/v1.0/check?account=123 -- проверить существование лицевого счета
 GET /api/v1.0/check?account=123&meter=42071086 -- проверить существование счетчика
-PUT /api/v1.0/readings?account=123&meter=42071086&reading=123654
+PUT /api/v1.0/reading?account=123&meter=42071086&reading=123654 -- передать показания счетчика
+
+Показания счетчиков
+1) LOG 
+  accountNo
+    meterNo
+      20201223102565312.json
+        {account, meter, timestamp, ip, "user-agent", reading}
+
+2) WORK
+  accountNo
+    meterNo
+      2020-12.json
+        {account, meter, timestamp, ip, "user-agent", reading}
+
+function putReading(account, meter, Date, ip, userAgent, reading);
+
 
 
 

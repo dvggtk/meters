@@ -1,5 +1,5 @@
 <script>
-	import {getAccount, getMeter, putValue} from './utils';
+	import {getAccount, getMeter, putReading} from './utils';
 	
 	const meterTypes = ['ЭЛ', 'ГВ', 'ХВ'];
 	const meterTypeNames = {
@@ -10,6 +10,7 @@
 	let currentMeterType = meterTypes[0];
 	let accountToCheck = "";
 	let accountPromise;
+	let account;
 
 	let meterToCheck = "";
 	let meterPromise;
@@ -20,19 +21,33 @@
 	let transmitPromise;
 	
 	function transmitHandler () {
-		transmitPromise = putValue(accountToCheck, meterToCheck, reading);
+		transmitPromise = putReading(accountToCheck, meterToCheck, reading);
 	};
 
-	$: {
+	$: if (accountToCheck) {
 		accountPromise = getAccount(accountToCheck); 
 		transmitPromise = null;
+		(async () => { 
+			account = null; account = await accountPromise; 
+		})()
+			.catch((err)=>{console.error(err.message)});
+	} else {
+		account = null;
+		accountPromise = null;
 	}
 
 	$: if (meterToCheck) {
-			meterPromise = getMeter(accountToCheck, meterToCheck);
-			transmitPromise = null;
-			(async () => { meter = null; meter = await meterPromise; })().catch(()=>{});
-		}
+		meterPromise = getMeter(accountToCheck, meterToCheck);
+		transmitPromise = null;
+		(async () => { 
+			meter = null; meter = await meterPromise; 
+		})()
+			.catch((err)=>{console.error(err.message)});
+	} else {
+		meter = null;
+		meterPromise = null;
+	}
+		
 
 	$: {
 		reading = reading;
@@ -46,6 +61,12 @@
 		background-color: beige;
 		padding: 5px;
 		max-width: 320px;
+	}
+
+	.hint {
+		text-align: center;
+		font-style: italic;
+		font-size: small;
 	}
 
 	.control {
@@ -105,29 +126,33 @@
 <p class="subtitle">
 	Показания счетчиков передаются в период с 20 по 25 число каждого месяца.
 </p>
+<p class="hint">Для тестирования: лицевой счет 777, номера счетчиков 77777771, 77777772, 77777773 </p>
 </hgroup>
 
 <label class="control">
 	<span class="control__title">Лицевой счет</span>
 	<input class="control__input" type=text bind:value={accountToCheck}>
-	<span class="control__state-icon">
-		{#await accountPromise}🔍
-		{:then account}✔
-		{:catch error}{accountToCheck ? "❌" : " "}
-		{/await}
-	</span>
+	{#if accountPromise}
+		<span class="control__state-icon">
+			{#await accountPromise}🔍
+			{:then account}✔
+			{:catch error}{accountToCheck ? "❌" : " "}
+			{/await}
+		</span>
+	{/if}
 </label>
-
 
 <label class="control">
 	<span class="control__title">Номер счетчика</span>
 	<input class="control__input" type=text bind:value={meterToCheck}>
-	<span class="control__state-icon">
-		{#await meterPromise}🔍
-		{:then meter}✔
-		{:catch error}{meterToCheck ? "❌" : " "}
-		{/await}
-	</span>
+	{#if meterPromise}
+		<span class="control__state-icon">
+			{#await meterPromise}🔍
+			{:then meter}✔
+			{:catch error}{meterToCheck ? "❌" : " "}
+			{/await}
+		</span>
+	{/if}
 </label>
 
 <div class="control">
@@ -151,7 +176,7 @@
 		<div class="control__state-text">
 			{#await transmitPromise} отправляю...
 			{:then ok} ✔ показания переданы 
-			{:catch} ❌ ошибка передачи показаний
+			{:catch error} ❌ {error.message}
 			{/await}
 		</div>
 	{/if}

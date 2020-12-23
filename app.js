@@ -13,10 +13,11 @@ var usersRouter = require('./routes/users');
 const _sseRouter = require('./routes/_sse');
 const apiRouter = require('./routes/api');
 const uploadRouter = require('./routes/upload');
-
-
+const readingsRouter = require('./routes/readings');
 
 var app = express();
+
+app.set('trust proxy', true);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +41,7 @@ app.use('/users', usersRouter);
 app.use('/_server-sent-events', _sseRouter);
 app.use('/api', apiRouter);
 app.use('/upload', uploadRouter);
+app.use('/readings', readingsRouter);
 
 
 // catch 404 and forward to error handler
@@ -52,6 +54,8 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  if (req.app.get('env') === 'development') console.error(err);
 
   // render the error page
   res.status(err.status || 500);

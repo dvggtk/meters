@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Показания за период #{period}
+  table.readings-table
+    tr
+      th Лицевой счет
+      th Счетчик
+      th Дата
+      th Показания
+      th ip
+      th источник
+    each reading in readings
+      tr
+        td= reading.account 
+        td= reading.meter
+        td= (new Date(reading.timestamp)).toLocaleString()
+        td= reading.reading
+        td= reading.ip
+        td= reading.source
+
+    // pre= JSON.stringify(readings, null, 4)
+  

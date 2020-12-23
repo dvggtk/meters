@@ -1,5 +1,6 @@
 @import "normalize.css";
 @import "visuallyhidden.css";
+@import "blocks/readings-table.css";
 
 *, *::before, *::after {
 	box-sizing: border-box;

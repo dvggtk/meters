@@ -4,7 +4,7 @@ async function getAccount (accountNoToCheck) {
 	url.search = new URLSearchParams(params).toString();
 
 	const response = await fetch(url);
-	if (!response.ok) throw Error("Лицевой счет не найден");
+	if (!response.ok) throw Error(`Лицевой счет "${accountNoToCheck}" не найден`);
 	
 	const account = await response.json();
 
@@ -13,24 +13,29 @@ async function getAccount (accountNoToCheck) {
 
 async function getMeter (accountNoToCheck, meterNoToCheck) {
 	const url = new URL('/api/v1.0/check', window.location.origin);
-	console.log(url);
 	const params = {account: accountNoToCheck, meter: meterNoToCheck};
 	url.search = new URLSearchParams(params).toString();
 
 	const response = await fetch(url);
-	if (!response.ok) throw Error("Счетчик не найден");
+	if (!response.ok) throw Error(`Счетчик "${meterNoToCheck}" не найден`);
 	
 	const meter = await response.json();
 
 	return meter;
 }
 
-
-async function putValue (accountNo, meterNo, reading) {
+async function putReading (accountNo, meterNo, reading) {
 	const meter = await getMeter(accountNo, meterNo);
 	if (!meter) throw Error("Не удалось передать показания");
-	meter.currentReading = reading;
+
+	const url = new URL('/api/v1.0/reading', window.location.origin);
+	const params = {account: accountNo, meter: meterNo, reading};
+	url.search = new URLSearchParams(params).toString();
+
+	const response = await fetch(url, {method: 'PUT'});
+	if (!response.ok) throw Error(`Ошибка при передаче показаний`);
+	
 	return true;
 }
 
-export {getAccount, getMeter, putValue};
+export {getAccount, getMeter, putReading};

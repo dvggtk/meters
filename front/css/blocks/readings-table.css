@@ -1,0 +1,9 @@
+.readings-table {
+  border-collapse: collapse;
+}
+
+.readings-table td,
+.readings-table th {
+  border: 1px solid #666;
+  padding: 3px;
+}
